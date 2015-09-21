@@ -3,12 +3,17 @@
 <head>
 	<title>Bodega</title>
 	<meta charset="utf-8">
+	<script src="js/jquery-2.1.4.js"></script>
 	<script src="js/jquery.colorbox.js"></script>
 	<script src="js/jquery.colorbox-es.js"></script>
-	<script src="js/jquery-2.1.4.js"></script>
 	<link rel="stylesheet" href="css/estilos.css" type="text/css" media="all"/>
 </head>
 <body>
+	<script>
+		$(document).ready(function(){
+			$('.ajax').colorbox();
+		})
+	</script>
 	<div id="wrapper">
 		<?php
 			//conectado, seleccionando la base de datos
@@ -31,10 +36,14 @@
 				</thead>
 		<?php
 			while($linea = mysql_fetch_array($resultado)){
+				$codBodega = $linea['codBodega'];
+				$descripcion = $linea['descripcion'];
+				$ubicacion = $linea['ubicacion'];
+				$numero = $linea['numero'];
 				echo "\t<tr>\n";
-				echo "\t\t<td><a href='prod.php?cbod=".$linea['codBodega']."'>".$linea['descripcion']."</td>";
-				echo "\t\t<td>".$linea['ubicacion']."</td>";
-				echo "\t\t<td>".$linea['numero']."</td>";
+				echo "\t\t<td><a href='prod.php?cbod=$codBodega' class='ajax' title='$descripcion' >$descripcion</td>";
+				echo "\t\t<td>$ubicacion</td>";
+				echo "\t\t<td>$numero</td>";
 				echo "\t</tr>\n";
 			}
 			echo "</table>\n";
